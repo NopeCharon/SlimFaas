@@ -169,6 +169,16 @@ jobs:
         run: cat coveragereport/SummaryGithub.md >> $GITHUB_STEP_SUMMARY
         shell: bash
 
+  annotation_policy:
+    name: Annotation admission policy
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      # The runner image provides kind and kubectl.
+      - name: Test demo/slimfaas-annotation-policy.yml on kind
+        run: python3 .bin/test-annotation-policy.py
+
   tags:
     needs: [unit_tests]
     runs-on: ubuntu-latest
